@@ -1,0 +1,273 @@
+<script type="text/javascript">
+    RED.nodes.registerType('gap-roberta', {
+        category: 'function',
+        color: '#89bf04',
+        defaults: {
+            method: { value: "", required: true },
+            units_token: { value: "" },
+            units_tokenType: { value: "str" },
+            sites_token: { value: "" },
+            sites_tokenType: { value: "str" },
+            devices_token: { value: "" },
+            devices_tokenType: { value: "str" },
+            devicessite_token: { value: "" },
+            devicessite_tokenType: { value: "str" },
+            devicessite_site: { value: "" },
+            devicessite_siteType: { value: "str" },
+            APImembers_token: { value: "" },
+            APImembers_tokenType: { value: "str" },
+            name: { value: "" }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'icon.png',
+        label: function () {
+            return this.name || this.method || "gap-roberta";
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        },
+        oneditprepare: function () {
+            var selectedMethod = $('#node-input-method option:selected');
+            if (!selectedMethod.val()) {
+                var methods = $('#node-input-method').children();
+                var firstMethod = methods.first();
+                $('#node-input-method').val(firstMethod.val());
+            }
+
+            var showParameters = function () {
+
+                $("#node-input-units_token").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-units_tokenType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#units_token").hide();
+
+                $("#node-input-sites_token").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-sites_tokenType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#sites_token").hide();
+
+                $("#node-input-devices_token").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-devices_tokenType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#devices_token").hide();
+
+                $("#node-input-devicessite_token").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-devicessite_tokenType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#devicessite_token").hide();
+
+                $("#node-input-devicessite_site").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-devicessite_siteType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#devicessite_site").hide();
+
+                $("#node-input-APImembers_token").typedInput({
+                    default: 'str',
+                    typeField: $("#node-input-APImembers_tokenType"),
+                    types: ['str', 'msg']
+                });
+
+                $("#APImembers_token").hide();
+
+                $("#optional-parameters").hide();
+                $("#optional-parameters-label").hide();
+                if ($("#node-input-method").val() === 'units') {
+
+                }
+                if ($("#node-input-method").val() === 'sites') {
+
+                }
+                if ($("#node-input-method").val() === 'devices') {
+
+                }
+                if ($("#node-input-method").val() === 'devicessite') {
+
+                    $("#optional-parameters").show();
+                    $("#optional-parameters-label").show();
+                    
+                }
+                if ($("#node-input-method").val() === 'APImembers') {
+
+                }
+
+                if ($("#optional-parameters").prop('checked')) {
+                    if ($("#node-input-method").val() === 'units') {
+
+                        $("#units_token").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'sites') {
+
+                        $("#sites_token").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'devices') {
+
+                        $("#devices_token").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'devicessite') {
+
+                        $("#devicessite_token").show();
+                        
+                        $("#devicessite_site").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'APImembers') {
+
+                        $("#APImembers_token").show();
+                        
+                    }
+                } else {
+                    if ($("#node-input-method").val() === 'units') {
+
+                        $("#units_token").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'sites') {
+
+                        $("#sites_token").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'devices') {
+
+                        $("#devices_token").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'devicessite') {
+
+                        $("#devicessite_token").show();
+                        
+                    }
+                    if ($("#node-input-method").val() === 'APImembers') {
+
+                        $("#APImembers_token").show();
+                        
+                    }
+                }
+            };
+
+            $("#node-input-method").change(function () {
+                showParameters();
+            });
+
+            $("#optional-parameters").change(function () {
+                showParameters();
+            });
+
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="gap-roberta">
+
+    <div class="form-row">
+        <label for="node-input-method"><i class="fa fa-tasks"></i> <span data-i18n="RobertaOpenApi.label.method"></span></label>
+        <select id="node-input-method">
+            <option value="units" data-i18n="RobertaOpenApi.parameters.units"></option>
+            <option value="sites" data-i18n="RobertaOpenApi.parameters.sites"></option>
+            <option value="devices" data-i18n="RobertaOpenApi.parameters.devices"></option>
+            <option value="devicessite" data-i18n="RobertaOpenApi.parameters.devicessite"></option>
+            <option value="APImembers" data-i18n="RobertaOpenApi.parameters.APImembers"></option>
+        </select>
+        &nbsp;
+        <input type="checkbox" id="optional-parameters" style="margin-left: 10px; vertical-align: text-bottom; width: auto;">
+        <label for="optional-parameters" id="optional-parameters-label" style="width: auto;"> <span data-i18n="RobertaOpenApi.parameters.optionalParameters"></span></label>
+    </div>
+
+    <div class="form-row" id="units_token">
+        <label for="node-input-units_token"><i class="fa fa-list"></i> <span data-i18n="RobertaOpenApi.parameters.token"></span></label>
+
+        <input type="text" id="node-input-units_token" placeholder="Token de seguridad" style="width:70%">
+        <input type="hidden" id="node-input-units_tokenType">
+    </div>
+
+    <div class="form-row" id="sites_token">
+        <label for="node-input-sites_token"><i class="fa fa-list"></i> <span data-i18n="RobertaOpenApi.parameters.token"></span></label>
+
+        <input type="text" id="node-input-sites_token" placeholder="Token de seguridad" style="width:70%">
+        <input type="hidden" id="node-input-sites_tokenType">
+    </div>
+
+    <div class="form-row" id="devices_token">
+        <label for="node-input-devices_token"><i class="fa fa-list"></i> <span data-i18n="RobertaOpenApi.parameters.token"></span></label>
+
+        <input type="text" id="node-input-devices_token" placeholder="Token de seguridad" style="width:70%">
+        <input type="hidden" id="node-input-devices_tokenType">
+    </div>
+
+    <div class="form-row" id="devicessite_token">
+        <label for="node-input-devicessite_token"><i class="fa fa-list"></i> <span data-i18n="RobertaOpenApi.parameters.token"></span></label>
+
+        <input type="text" id="node-input-devicessite_token" placeholder="Token de seguridad" style="width:70%">
+        <input type="hidden" id="node-input-devicessite_tokenType">
+    </div>
+
+    <div class="form-row" id="devicessite_site">
+        <label for="node-input-devicessite_site"><i class="fa fa-list"></i> <span data-i18n="RobertaOpenApi.parameters.site"></span></label>
+
+        <input type="text" id="node-input-devicessite_site" placeholder="Site del que queremos obtener la lista de dispositivos" style="width:70%">
+        <input type="hidden" id="node-input-devicessite_siteType">
+    </div>
+
+    <div class="form-row" id="APImembers_token">
+        <label for="node-input-APImembers_token"><i class="fa fa-list"></i> <span data-i18n="RobertaOpenApi.parameters.token"></span></label>
+
+        <input type="text" id="node-input-APImembers_token" placeholder="Token de seguridad" style="width:70%">
+        <input type="hidden" id="node-input-APImembers_tokenType">
+    </div>
+
+    <hr/>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="gap-roberta">
+
+    <p></p>
+    <p><b>Methods</b></p>
+        <h3>GET /units</h3>
+        <p>Devuelve todos las unidades operativas de un negocio</p>
+        <dl class="message-properties">
+        <dt>TOKEN <span class="property-type">string</span></dt>
+        </dl>
+        <h3>GET /sites</h3>
+        <p>Devuelve todos las unidades operativas de un negocio</p>
+        <dl class="message-properties">
+        <dt>TOKEN <span class="property-type">string</span></dt>
+        </dl>
+        <h3>GET /devices</h3>
+        <p>Devuelve todos los dispositivos de un site</p>
+        <dl class="message-properties">
+        <dt>TOKEN <span class="property-type">string</span></dt>
+        </dl>
+        <h3>GET /devicessite</h3>
+        <p>Devuelve todos los dispositivos de un site</p>
+        <dl class="message-properties">
+        <dt>TOKEN <span class="property-type">string</span></dt>
+        <dt>site <span class="property-type">string</span></dt>
+        </dl>
+        <h3>GET /members</h3>
+        <p>Devuelve todos los miembros de un site</p>
+        <dl class="message-properties">
+        <dt>TOKEN <span class="property-type">string</span></dt>
+        </dl>
+</script>

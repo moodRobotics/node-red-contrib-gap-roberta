@@ -1,0 +1,25 @@
+{
+    "RobertaOpenApi": {
+        "label": {
+            "service": "Service",
+            "method": "Methode",
+            "host": "Host",
+            "header": "Header",
+            "value": "Wert",
+            "isQuery": "Suchanfrage"
+        },
+        "status": {
+            "requesting": "Anfrage..."
+        },
+        "parameters": {
+            "units": "GET /units",
+            "token": "TOKEN",
+            "sites": "GET /sites",
+            "devices": "GET /devices",
+            "devicessite": "GET /devicessite",
+            "site": "site",
+            "APImembers": "GET /members",
+            "optionalParameters": "Optionen"
+        }
+    }
+}
